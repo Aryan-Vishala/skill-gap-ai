@@ -1,0 +1,19 @@
+# Node
+node_modules/
+backend-node/node_modules/
+frontend/node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Temp files
+ml-service/temp_*
+uploads/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
