@@ -1,5 +1,6 @@
 from skill_extraction import extract_skills
 from similarity import calculate_similarity
+from learning_db import get_learning_path
 
 
 def analyze(resume_text, job_text):
@@ -33,12 +34,16 @@ def analyze(resume_text, job_text):
     else:
         skill_match_score = 0
 
+    # NEW: Generate learning path for missing skills
+    learning_path = get_learning_path(missing_skills, job_text)
+
     return {
         "semantic_score": round(score * 100, 2),
         "skill_match_score": round(skill_match_score, 2),
         "matched_skills": matched_skills,
         "resume_skills": resume_skills,
-        "missing_skills": missing_skills
+        "missing_skills": missing_skills,
+        "learning_path": learning_path
     }
 
 def categorize(skills_list):
