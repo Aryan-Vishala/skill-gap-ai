@@ -2,16 +2,21 @@ from fastapi import FastAPI, UploadFile, File, Form
 from pdf_parser import extract_text_from_pdf
 from analyzer import analyze
 import shutil
+import os
 
 app = FastAPI()
 
+# ✅ Root route (VERY IMPORTANT for Render)
+@app.get("/")
+def read_root():
+    return {"status": "ML service running"}
 
+# ✅ Your main endpoint
 @app.post("/analyze-resume")
 async def analyze_resume(
     file: UploadFile = File(...),
     job_description: str = Form(...)
 ):
-
     file_path = f"temp_{file.filename}"
 
     with open(file_path, "wb") as buffer:
